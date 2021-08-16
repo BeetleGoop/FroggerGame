@@ -46,13 +46,13 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.UpArrow) && transform.position.y < myGameManager.levelConstraintTop) //move up, but also dont allow upward movement if level constraint value exceeded.
             {
-                transform.Translate(new Vector2(0, 1));
+                transform.Translate(new Vector2(0, .75f));
                 soundSource.PlayOneShot(jumpSound);
             }
 
             else if (Input.GetKeyDown(KeyCode.DownArrow) && transform.position.y > myGameManager.levelConstraintBottom) //move down
             {
-                transform.Translate(new Vector2(0, -1));
+                transform.Translate(new Vector2(0, -.75f));
                 soundSource.clip = jumpSound;
                 soundSource.pitch = Random.Range(0.5f, 1f);
                 soundSource.Play();
