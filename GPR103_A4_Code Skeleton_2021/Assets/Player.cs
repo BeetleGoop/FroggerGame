@@ -48,6 +48,7 @@ public class Player : MonoBehaviour
             {
                 transform.Translate(new Vector2(0, .75f));
                 soundSource.PlayOneShot(jumpSound);
+                myGameManager.UpdateScore(100);
             }
 
             else if (Input.GetKeyDown(KeyCode.DownArrow) && transform.position.y > myGameManager.levelConstraintBottom) //move down
@@ -100,6 +101,11 @@ public class Player : MonoBehaviour
             else if(collision.transform.tag == "Water")
             {
                 isInWater = true;
+            }
+            else if(collision.transform.tag == "Bonus")
+            {
+                myGameManager.CollectBonus(500, collision.transform.position);
+                Destroy(collision.gameObject);
             }
         }
     }
