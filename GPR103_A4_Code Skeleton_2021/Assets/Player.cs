@@ -21,19 +21,22 @@ public class Player : MonoBehaviour
     public bool isInWater = false; //is the player in water?
 
     //Audio clips and container
-    public AudioClip jumpSound;
+    public AudioClip jumpSound; //variable for jumping sound
 
-    public AudioClip deathSound;
+    public AudioClip deathSound; //variable for death sound
 
-    private AudioSource soundSource;
+    public AudioClip pickUpSound; //variable for pickup sonund
+
+    private AudioSource soundSource; //audio container
 
     //special effects
-    public GameObject explosionEffect;
+    public GameObject explosionEffect; //particle effect for dying
 
     private GameManager myGameManager; //A reference to the GameManager in the scene.
 
+
     // Start is called before the first frame update
-    void Start()
+    void Start() //on start, the game manager and the sound source is defined.
     {
         myGameManager = GameObject.FindObjectOfType<GameManager>();
         soundSource = GetComponent<AudioSource>();
@@ -106,6 +109,8 @@ public class Player : MonoBehaviour
             {
                 myGameManager.CollectBonus(500, collision.transform.position);
                 Destroy(collision.gameObject);
+                soundSource.PlayOneShot(pickUpSound);
+                
             }
         }
     }
