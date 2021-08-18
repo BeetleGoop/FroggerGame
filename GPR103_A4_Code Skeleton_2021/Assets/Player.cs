@@ -17,7 +17,6 @@ public class Player : MonoBehaviour
     public bool playerCanMove = false; //Can the player currently move?
 
     public bool isOnPlatform = false; //is the player on the log?
-
     public bool isInWater = false; //is the player in water?
 
     //Audio clips and container

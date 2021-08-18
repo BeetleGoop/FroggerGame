@@ -38,13 +38,13 @@ public class GameManager : MonoBehaviour
         UpdateScore(-currentScore);
         currentScoreUI.text = "0";
 
-        int randomCarXValue = Random.Range(-3, 3);
+        int randomCarXValue = Random.Range(-3, 3); //spawns a bonus pickup in the car area
         Vector2 bonusCarPosition = new Vector2(randomCarXValue, -1.1f);
         GameObject tempCarObj = Instantiate(bonusPrefab, bonusCarPosition, Quaternion.identity) as GameObject;
         spawnedBonus.Add(tempCarObj);
         
-        int randomLogXValue = Random.Range(-3, 3);
-        Vector2 bonusLogPosition = new Vector2(randomLogXValue, 2);
+        int randomLogXValue = Random.Range(-3, 3); //spawns a bonus pickup in the log area
+        Vector2 bonusLogPosition = new Vector2(randomLogXValue, 1.7f);
         GameObject tempLogObj = Instantiate(bonusPrefab, bonusLogPosition, Quaternion.identity) as GameObject;
         spawnedBonus.Add(tempLogObj);
         
