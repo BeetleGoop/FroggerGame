@@ -722,7 +722,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6,
     type: 3}
   m_Color: {r: 0, g: 0, b: 0.2784314, a: 1}
@@ -829,6 +829,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GoalFrog
+      objectReference: {fileID: 0}
+    - target: {fileID: 493202424423935499, guid: 06ef098bbb9295a4491e2fc7b8cd5f92,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 493202424423935604, guid: 06ef098bbb9295a4491e2fc7b8cd5f92,
         type: 3}
@@ -1201,6 +1206,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GoalFrog (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 493202424423935499, guid: 06ef098bbb9295a4491e2fc7b8cd5f92,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 493202424423935604, guid: 06ef098bbb9295a4491e2fc7b8cd5f92,
         type: 3}
@@ -1604,6 +1614,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GoalFrog (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 493202424423935499, guid: 06ef098bbb9295a4491e2fc7b8cd5f92,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 493202424423935604, guid: 06ef098bbb9295a4491e2fc7b8cd5f92,
         type: 3}
