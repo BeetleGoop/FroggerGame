@@ -27,11 +27,27 @@ public class GameManager : MonoBehaviour
     [Header("FX")]
     public GameObject bonusCollectEffect;
 
+    [Header("Bonus Respawn")]
+    public GameObject bonusPrefab; //variable to contain the bonus prefab
+    public int bonusCount = 1; //spawn amount
+    public List<GameObject> spawnedBonus = new List<GameObject>(); //list of spawned bonuses
+
     // Start is called before the first frame update
     void Start()
     {
         UpdateScore(-currentScore);
         currentScoreUI.text = "0";
+
+        int randomCarXValue = Random.Range(-3, 3);
+        Vector2 bonusCarPosition = new Vector2(randomCarXValue, -1.1f);
+        GameObject tempCarObj = Instantiate(bonusPrefab, bonusCarPosition, Quaternion.identity) as GameObject;
+        spawnedBonus.Add(tempCarObj);
+        
+        int randomLogXValue = Random.Range(-3, 3);
+        Vector2 bonusLogPosition = new Vector2(randomLogXValue, 2);
+        GameObject tempLogObj = Instantiate(bonusPrefab, bonusLogPosition, Quaternion.identity) as GameObject;
+        spawnedBonus.Add(tempLogObj);
+        
     }
 
     // Update is called once per frame
@@ -51,5 +67,6 @@ public class GameManager : MonoBehaviour
     {
         UpdateScore(amount);
         Instantiate(bonusCollectEffect, pos, Quaternion.identity);
+
     }
 }
