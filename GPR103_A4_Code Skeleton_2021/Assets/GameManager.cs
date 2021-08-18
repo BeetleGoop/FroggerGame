@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public int currentScore = 0; //The current score in this round.
     public int highScore = 0; //The highest score achieved either in this session or over the lifetime of the game.
     public TMP_Text currentScoreUI;
+    public TMP_Text highScoreText;
 
     [Header("Playable Area")]
     public float levelConstraintTop; //The maximum positive Y value of the playable space.
@@ -35,6 +36,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //gets the previous value of the high score text and prints it to a string so it can be displayed in the UI, if there is no value it uses the default 0
+        highScoreText.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
+
         UpdateScore(-currentScore);
         currentScoreUI.text = "0";
 
@@ -53,7 +57,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //https://www.youtube.com/watch?v=vZU51tbgMXk high score system tutorial from here.
+        PlayerPrefs.SetInt("HighScore", currentScore); //gets the value of the current score and sets it as the high score.
     }
 
     public void UpdateScore(int scoreAmount)
