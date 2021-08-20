@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour
     [Header("Scoring")]
     public int currentScore = 0; //The current score in this round.
     public int highScore = 0; //The highest score achieved either in this session or over the lifetime of the game.
-    public TMP_Text currentScoreUI;
-    public TMP_Text highScoreText;
+    public TMP_Text currentScoreUI; //text object for the current score
+    public TMP_Text highScoreText; //text object for the high score
 
     [Header("Playable Area")]
     public float levelConstraintTop; //The maximum positive Y value of the playable space.
@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     public float gameTimeRemaining; //The current elapsed time
 
     [Header("FX")]
-    public GameObject bonusCollectEffect;
+    public GameObject bonusCollectEffect; //the particle effect for the bonus object
 
     [Header("Bonus Respawn")]
     public GameObject bonusPrefab; //variable to contain the bonus prefab
@@ -61,14 +61,14 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("HighScore", currentScore); //gets the value of the current score and sets it as the high score.
     }
 
-    public void UpdateScore(int scoreAmount)
+    public void UpdateScore(int scoreAmount) //takes the current score and converts it to a string for the ui
     {
         currentScore += scoreAmount;
         currentScoreUI.text = currentScore.ToString();
 
     }
 
-    public void CollectBonus(int amount, Vector2 pos )
+    public void CollectBonus(int amount, Vector2 pos ) //triggers the collect bonus function, with a nice particle effect. 
     {
         UpdateScore(amount);
         Instantiate(bonusCollectEffect, pos, Quaternion.identity);

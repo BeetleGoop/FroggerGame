@@ -30,7 +30,8 @@ public class Player : MonoBehaviour
     public GameObject explosionEffect; //particle effect for dying
     private GameManager myGameManager; //A reference to the GameManager in the scene.
 
-    public float delayCounter = 1f;
+    //ui 
+    public float delayCounter = 1f; //a variable for the a delay counter, so that when you win or lose the screen doesnt change instantly
 
 
     // Start is called before the first frame update
@@ -80,79 +81,78 @@ public class Player : MonoBehaviour
         {
             if (isInWater == true && isOnPlatform == false) //this statement must be entirely true to kill the player.
             {
-                KillPlayer();
+                KillPlayer(); //executes the kill player function
             }
         }
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision) //a variety of collision enter checks
     {
-        if(playerIsAlive == true)
+        if(playerIsAlive == true) //checking if the player is alive
         {
-            if (collision.transform.GetComponent<Vehicle>() != null)
+            if (collision.transform.GetComponent<Vehicle>() != null) //if you hit a vehicle you die
             {
                 KillPlayer();
             }
-            else if(collision.transform.GetComponent<Platform>() != null)
+            else if(collision.transform.GetComponent<Platform>() != null) //if you hit a log you become its child, changes platform bool to true
             {
                 transform.SetParent(collision.transform);
                 isOnPlatform = true;
             }
-            else if(collision.transform.tag == "Water")
+            else if(collision.transform.tag == "Water") //if you hit the water, changes bool to true
             {
                 isInWater = true;
             }
-            else if(collision.transform.tag == "Bonus")
+            else if(collision.transform.tag == "Bonus") //if collide with something tagged with bonus
             {
                 myGameManager.CollectBonus(500, collision.transform.position);
                 Destroy(collision.gameObject);
-                soundSource.PlayOneShot(pickUpSound);
-                
+                soundSource.PlayOneShot(pickUpSound); //destroy the object, play a sound, and add 500 to the score.
             }
-            else if (collision.transform.tag == "Victory")
+            else if (collision.transform.tag == "Victory") //if colliding with the victory tagged object you win!
             {
-                Invoke("Victory", delayCounter);
-                soundSource.PlayOneShot(victorySound);
+                Invoke("Victory", delayCounter); //invokes the new screen and also the delay
+                soundSource.PlayOneShot(victorySound); //plays victory sound
             }
         }
 
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision) //on collision exit
     {
-        if (playerIsAlive == true)
+        if (playerIsAlive == true) //as long as the player is alive do the following
         {
             if(collision.transform.GetComponent<Platform>() != null)
             {
                 transform.SetParent(null);
-                isOnPlatform = false;
+                isOnPlatform = false; //remove the player from the parent log, and update the log bool to false.
             }
             else if (collision.transform.tag == "Water")
             {
-                isInWater = false;
+                isInWater = false; //update the water bool to false. 
             }
         }
     }
 
-    void KillPlayer()
+    void KillPlayer() //a custom function to kill the player
     {
-        GetComponent<SpriteRenderer>().enabled = false;
-        soundSource.PlayOneShot(deathSound);
-        Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        GetComponent<SpriteRenderer>().enabled = false; //turns off the sprite
+        soundSource.PlayOneShot(deathSound); //plays a sound on death
+        Instantiate(explosionEffect, transform.position, Quaternion.identity); //plays the explosion particle effect
 
-        playerIsAlive = false;
-        playerCanMove = false;
-        print("there has been a terrible accident");
-        Invoke("GameOver", delayCounter);
+        playerIsAlive = false; //changes the bool value of this variable
+        playerCanMove = false;//changes the bool value of this variable
+        print("there has been a terrible accident"); //prints to the console
+        Invoke("GameOver", delayCounter); //executes the game over function, with a delay
     }
 
-    public void GameOver()
+    public void GameOver() //a game over function to be called when the player dies. 
     {
         SceneManager.LoadScene("GameOver");
     }
 
-    public void Victory()
+    public void Victory()//a victory function to be called when the goal is reached. 
     {
         SceneManager.LoadScene("Victory");
     }

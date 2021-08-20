@@ -18,15 +18,15 @@ public class Vehicle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = startingPosition;
+        transform.position = startingPosition; //sets the start position of the cars
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector2.left * Time.deltaTime * speed * moveDirection);
+        transform.Translate(Vector2.left * Time.deltaTime * speed * moveDirection); //moves the cars
 
-        if((transform.position.x * moveDirection) < (endPosition.x * moveDirection))
+        if((transform.position.x * moveDirection) < (endPosition.x * moveDirection)) //an if statement to make the cars loop.
         {
             transform.position = startingPosition;
         }
