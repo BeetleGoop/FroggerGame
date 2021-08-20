@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.ShortcutManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// This script must be used as the core Player script for managing the player character in the game.
@@ -21,17 +21,16 @@ public class Player : MonoBehaviour
 
     //Audio clips and container
     public AudioClip jumpSound; //variable for jumping sound
-
     public AudioClip deathSound; //variable for death sound
-
     public AudioClip pickUpSound; //variable for pickup sonund
-
+    public AudioClip victorySound;
     private AudioSource soundSource; //audio container
 
     //special effects
     public GameObject explosionEffect; //particle effect for dying
-
     private GameManager myGameManager; //A reference to the GameManager in the scene.
+
+    public float delayCounter = 1f;
 
 
     // Start is called before the first frame update
@@ -111,7 +110,13 @@ public class Player : MonoBehaviour
                 soundSource.PlayOneShot(pickUpSound);
                 
             }
+            else if (collision.transform.tag == "Victory")
+            {
+                Invoke("Victory", delayCounter);
+                soundSource.PlayOneShot(victorySound);
+            }
         }
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -139,6 +144,16 @@ public class Player : MonoBehaviour
         playerIsAlive = false;
         playerCanMove = false;
         print("there has been a terrible accident");
+        Invoke("GameOver", delayCounter);
     }
 
+    public void GameOver()
+    {
+        SceneManager.LoadScene("GameOver");
+    }
+
+    public void Victory()
+    {
+        SceneManager.LoadScene("Victory");
+    }
 }
